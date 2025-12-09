@@ -1,0 +1,10 @@
+.prueba
+{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    font-family: sans-serif;
+    align-items: start;
+    flex-direction: row;
+    align-content: end;
+}
