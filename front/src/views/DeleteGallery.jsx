@@ -8,15 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MySpinner from '../components/MySpinner';
 
 const MainContiner = styled.div`
-  :root
-  {
-    fonti-size: 16px;
+  :root {
+    font-size: 16px;
   }
 
-  *{
-  margin: 0;
-  padding: 0;
-  font-family: roboto, sans-serif;
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: roboto, sans-serif;
   }
 `;
 
@@ -26,7 +25,7 @@ export default function DeleteGallery() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/product')
+        fetch('http://localhost:8080/products')
             .then(res => res.json())
             .then(res => {
                 setData(res);
@@ -34,7 +33,7 @@ export default function DeleteGallery() {
             })
             .catch((error) => {
               setError('Hubo un problema al cargar los productos.');
-              setCargando(false);
+              setLoading(false);
           });
     }, []);
 
@@ -46,26 +45,30 @@ export default function DeleteGallery() {
 
     return (
         <MainContiner>
-        <Header />
-        <section style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "20px", flexWrap: "wrap" }}>
-            {data.map((product) => (
-                <div key={product.id} style={{ border: "1px solid #ccc", padding: "20px", width: "200px", textAlign: "center", borderRadius: "8px" }}>
-                    <img src={product.image} alt={product.name} style={{ width: "100%", height: "200px", borderRadius: "4px", objectFit: "cover" }} />
-                    <h3>{product.name}</h3>
-                    <p>{product.price} USD</p>
-                    <Link to={`/delete/${product.id}`}>
-                        <button
-                            style={{ padding: "10px 15px", backgroundColor: "red", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
-                        >
-                            Eliminar Producto
-                        </button>            
-                    </Link>
+            <Header />
+            <section style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "20px", flexWrap: "wrap" }}>
+                {data.map((product) => (
+                    <div key={product.product_id} style={{ border: "1px solid #ccc", padding: "20px", width: "200px", textAlign: "center", borderRadius: "8px" }}>
+                        <img 
+                            src={`http://localhost:8080${product.photo}`} 
+                            alt={product.name} 
+                            style={{ width: "100%", height: "200px", borderRadius: "4px", objectFit: "cover" }} 
+                        />
 
-                </div>
-            ))}
-        </section>
-        <Footer />
-        <Nav2 />
+                        <h3>{product.name}</h3>
+                        <p>{product.price} $</p>
+                        <Link to={`/delete/${product.product_id}`}>
+                            <button
+                                style={{ padding: "10px 15px", backgroundColor: "red", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
+                            >
+                                Eliminar Producto
+                            </button>            
+                        </Link>
+                    </div>
+                ))}
+            </section>
+            <Footer />
+            <Nav2 />
         </MainContiner>
     );
 }

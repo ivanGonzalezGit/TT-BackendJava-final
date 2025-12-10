@@ -46,10 +46,10 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/admin');
+      const res = await fetch('http://localhost:8080/admins');
       const usuarios = await res.json();
 
-      const existeUsuario = usuarios.some(u => u.name === usuario && u.pass === password);
+      const existeUsuario = usuarios.some(u => u.name === usuario && u.password === password);
 
       if (!existeUsuario) {
         alert('Usuario o contraseña incorrectos');
@@ -83,7 +83,7 @@ export default function Login() {
           <h2>Iniciar sesión</h2>
 
           <div>
-            <label>Usuario:</label><br />
+            <label>Usuario (admin):</label><br />
             <input
               type="text"
               value={usuario}
@@ -93,7 +93,7 @@ export default function Login() {
           </div>
 
           <div>
-            <label>Contraseña:</label><br />
+            <label>Contraseña (1234):</label><br />
             <input
               type="password"
               value={password}
