@@ -34,4 +34,13 @@ public class ProductController {
         return this.productService.findAllProducts(name, category);
     }
 
+    @PutMapping("/products/{id}")
+    public Product editProductById(@PathVariable Long id, @RequestBody Product dataToEdith){
+        return this.productService.editProductById(id, dataToEdith);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public Product deleteProductById(@PathVariable Long id){
+        return this.productService.deleteProductById(id);
+    }
 }

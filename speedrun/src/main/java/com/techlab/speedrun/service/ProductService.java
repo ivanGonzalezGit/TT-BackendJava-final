@@ -50,15 +50,48 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
-    public Product editProductById(Long id, Product dataToEdit){
+    public Product editProductById(Long id, Product dataToEdit) {
         Product product = this.getProductById(id);
 
-        if(!stringUtils.isEmpty(dataToEdit.getName())){
-            System.out.printf("Editando el nombre del producto: Anterior: %s - Actual: %s", product.getName(), dataToEdit.getName());
+        if (!stringUtils.isEmpty(dataToEdit.getName())) {
             product.setName(dataToEdit.getName());
         }
 
-        return this.productRepository.save(product);
+        if (!stringUtils.isEmpty(dataToEdit.getDescription())) {
+            product.setDescription(dataToEdit.getDescription());
+        }
+
+        if (!stringUtils.isEmpty(dataToEdit.getPhoto())) {
+            product.setPhoto(dataToEdit.getPhoto());
+        }
+
+        if (!stringUtils.isEmpty(dataToEdit.getThumbnail())) {
+            product.setThumbnail(dataToEdit.getThumbnail());
+        }
+
+        if (dataToEdit.getPrice() != null && dataToEdit.getPrice()>=0) {
+            product.setPrice(dataToEdit.getPrice());
+        }
+
+        if (!stringUtils.isEmpty(dataToEdit.getCategory())) {
+            product.setCategory(dataToEdit.getCategory());
+        }
+
+        if (!stringUtils.isEmpty(dataToEdit.getSubcategory())) {
+            product.setSubcategory(dataToEdit.getSubcategory());
+        }
+
+        if (dataToEdit.getStock() != null && dataToEdit.getStock()>=0) {
+            product.setStock(dataToEdit.getStock());
+        }
+
+        return productRepository.save(product);
+    }
+
+    public Product deleteProductById(Long id){
+        Product product = this.getProductById(id);
+        this.productRepository.delete(product);
+        return product;
     }
 
 }
