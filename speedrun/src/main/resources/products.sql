@@ -1,3 +1,7 @@
+
+INSERT INTO admin (name, password) VALUES
+('admin', '1234');
+
 INSERT INTO product (name, description, photo, thumbnail, price, category, subcategory, stock) VALUES
 ('FOND DE CAVE', 'VINO TINTO CABERNET RESERVA FOND DE CAVE X 750 CC', '/photos/fond_de_cave.jpg', '/thumbnails/fond_de_cave.jpg', 13295.0, 'VINO', 'TINTO', 30),
 ('DON DAVID', 'VINO TINTO MALBEC RESERVA DON DAVID X 750 CC', '/photos/don_david.jpg', '/thumbnails/don_david.jpg', 13295.0, 'VINO', 'TINTO', 30),
